@@ -4,6 +4,11 @@ import user from "./assest/img/user.png";
 
 function App() {
   const [name, setName] = useState("");
+  const search=(e)=>{
+    e.preventDefault();
+    console.log(name);
+    
+  }
   return (
     <div className="container vh-100 d-flex justify-content-center align-items-center">
       <div className="card border-0" style={{ width: "25rem" }}>
@@ -11,9 +16,7 @@ function App() {
           <div className="container-fluid">
             <form
               className="d-flex w-100"
-              onSubmit={(e) => {
-                e.preventDefault();
-              }}
+              onSubmit={search}
             >
               <input
                 onChange={(e) => {
