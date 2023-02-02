@@ -21,14 +21,13 @@ function App() {
           <div className="container-fluid">
             <form className="d-flex w-100" onSubmit={search}>
               <input
-              value={name}
+                value={name}
                 onChange={(e) => {
                   setName(e.target.value);
-                  if(e.target.value===''){
+                  if (e.target.value === "") {
                     setResponse(null);
                   }
                 }}
-                
                 className="form-control me-2 w-100"
                 type="search"
                 placeholder="Enter our Name ..."
@@ -44,19 +43,24 @@ function App() {
         <div className="card-body">
           <h5 className="card-title">Your Name is: {name}</h5>
           <ul className="list-group ">
-            {(response.length === 0)?<h1>No Result</h1>:()}
-            {response.map(country => {
-              return (
-                <li className="list-group-item d-flex justify-content-between align-items-start">
-                  <div className="ms-2 me-auto">
-                    <div className="fw-bold">{country.country_id}</div>
-                  </div>
-                  <span className="badge bg-primary rounded-pill">
-                    {(country.probability*100).toFixed(2)}%
-                  </span>
-                </li>
-              );
-            })}
+            {(response?.length === 0) ? 
+              <div className="alert alert-primary" role="alert">
+              No Result
+            </div>
+             : (
+              response?.map((country) => {
+                return (
+                  <li className="list-group-item d-flex justify-content-between align-items-start">
+                    <div className="ms-2 me-auto">
+                      <div className="fw-bold">{country.country_id}</div>
+                    </div>
+                    <span className="badge bg-primary rounded-pill">
+                      {(country.probability * 100).toFixed(2)}%
+                    </span>
+                  </li>
+                );
+              })
+            )}
           </ul>
         </div>
       </div>
