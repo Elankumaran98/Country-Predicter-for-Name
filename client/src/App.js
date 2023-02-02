@@ -2,6 +2,7 @@ import { useState } from "react";
 import axios from "axios";
 import "./App.css";
 import user from "./assest/img/user.png";
+import allCountries from "./assest/json/country-abbreviation.json"
 
 function App() {
   const [name, setName] = useState("");
@@ -10,9 +11,19 @@ function App() {
   const search = (e) => {
     e.preventDefault();
     setLoading(true);
-    console.log(name);
     axios.get("https://api.nationalize.io/?name=" + name).then((res) => {
-      console.log(res.data);
+      const result=[];
+      const countries=res.data.country;
+      console.log(allCountries)
+      countries.forEach(country=>{
+        allCountries.forEach(c=>{
+          if (c.abbreviation===country.country_id) {
+            country.fullName=c.country
+            result.push(country);
+          }
+        })
+      })
+      console.log(result)
       setResponse(res.data.country);
       setLoading(false);
     });
@@ -59,7 +70,7 @@ function App() {
                 return (
                   <li className="list-group-item d-flex justify-content-between align-items-start">
                     <div className="ms-2 me-auto">
-                      <div className="fw-bold">{country.country_id}</div>
+                      <div className="fw-bold">{country.fullName}</div>
                     </div>
                     <span className="badge bg-primary rounded-pill">
                       {(country.probability * 100).toFixed(2)}%
