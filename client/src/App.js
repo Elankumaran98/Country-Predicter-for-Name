@@ -2,7 +2,7 @@ import { useState } from "react";
 import axios from "axios";
 import "./App.css";
 import user from "./assest/img/user.png";
-import allCountries from "./assest/json/country-abbreviation.json"
+import allCountries from "./assest/json/country-abbreviation.json";
 
 function App() {
   const [name, setName] = useState("");
@@ -12,18 +12,18 @@ function App() {
     e.preventDefault();
     setLoading(true);
     axios.get("https://api.nationalize.io/?name=" + name).then((res) => {
-      const result=[];
-      const countries=res.data.country;
-      console.log(allCountries)
-      countries.forEach(country=>{
-        allCountries.forEach(c=>{
-          if (c.abbreviation===country.country_id) {
-            country.fullName=c.country
+      const result = [];
+      const countries = res.data.country;
+      console.log(allCountries);
+      countries.forEach((country) => {
+        allCountries.forEach((c) => {
+          if (c.abbreviation === country.country_id) {
+            country.fullName = c.country;
             result.push(country);
           }
-        })
-      })
-      console.log(result)
+        });
+      });
+      console.log(result);
       setResponse(res.data.country);
       setLoading(false);
     });
