@@ -6,12 +6,15 @@ import user from "./assest/img/user.png";
 function App() {
   const [name, setName] = useState("");
   const [response, setResponse] = useState();
+  const [loading, setLoading] = useState(false);
   const search = (e) => {
     e.preventDefault();
+    setLoading(true);
     console.log(name);
     axios.get("https://api.nationalize.io/?name=" + name).then((res) => {
       console.log(res.data);
       setResponse(res.data.country);
+      setLoading(false);
     });
   };
   return (
@@ -30,7 +33,7 @@ function App() {
                 }}
                 className="form-control me-2 w-100"
                 type="search"
-                placeholder="Enter our Name ..."
+                placeholder="Enter Your Name ..."
                 aria-label="Search"
               />
               <button className="btn btn-outline-light" type="submit">
@@ -43,11 +46,15 @@ function App() {
         <div className="card-body">
           <h5 className="card-title">Your Name is: {name}</h5>
           <ul className="list-group ">
-            {(response?.length === 0) ? 
-              <div className="alert alert-primary" role="alert">
-              No Result
-            </div>
-             : (
+            {loading ? (
+              <div className="spinner-border text-danger" role="status">
+                <span className="visually-hidden">Loading...</span>
+              </div>
+            ) : response?.length === 0 ? (
+              <div className="alert alert-warning" role="alert">
+                No Result
+              </div>
+            ) : (
               response?.map((country) => {
                 return (
                   <li className="list-group-item d-flex justify-content-between align-items-start">
