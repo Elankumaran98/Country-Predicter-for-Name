@@ -1,8 +1,17 @@
 import React from 'react'
+import "../App.css"
 
 function Navbar() {
   return (
-    <div>Navbar</div>
+    <nav className='navbar'>
+        Mr.K
+        <ul>
+            <li></li>
+            <li></li>
+            <li></li>
+            <li></li>
+        </ul>
+    </nav>
   )
 }
 
