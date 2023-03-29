@@ -21,3 +21,24 @@ body{
     gap: 20px;
     list-style: none;
 }
+
+.nav-link{
+    color: rgb(87, 155, 132);
+    text-transform: none;
+}
+.nav-link:hover{
+    color: rgb(224, 91, 38);
+    text-transform: none;
+    font-family: 'Courier New', Courier, monospace;
+}
+
+.nav-icons{
+    display: none;
+    font-size: 2rem;
+    cursor: pointer;
+}
+@media screen and (max-width:800px){
+    .nav-icons{
+        display: flex;
+    }
+} 
